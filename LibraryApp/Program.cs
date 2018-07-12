@@ -8,17 +8,14 @@ namespace LibraryApp
     {
 
         private static readonly BookRepository bookRepository = new BookRepository(menu);
-        private static readonly Menu menu = new Menu(bookRepository);
+        private static readonly BookRepositoryService bookRepositoryService = new BookRepositoryService(bookRepository);
+        private static readonly Menu menu = new Menu(bookRepository, bookRepositoryService);
 
 
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome in library system LibraryApp v1.0");
-            menu.showMenu();
-            
-
-           
-
+            menu.ShowMenu();
         }
     }
 }

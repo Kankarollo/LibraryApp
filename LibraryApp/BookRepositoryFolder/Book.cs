@@ -8,7 +8,7 @@ namespace LibraryApp.BookRepositoryFolder
     {
         public string name { get; set; }
         public string author { get; set; }
-        public int ISBNnumber { get; set; }
+        public string  ISBNnumber { get; set; }
         public DateTime lastBorrow { get; set; }
         public string borrower { get; set; }
         public bool borrowed { get; set; } 

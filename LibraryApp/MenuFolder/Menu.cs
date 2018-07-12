@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using LibraryApp.BookRepositoryFolder;
 
@@ -8,24 +9,29 @@ namespace LibraryApp.MenuFolder
     class Menu : IMenu
     {
         private readonly IBookRepository _bookRepository;
+        private readonly IBookRepositoryService _bookRepositoryService;
 
-        public Menu(IBookRepository bookRepository)
+        public Menu(IBookRepository bookRepository, IBookRepositoryService bookRepositoryService)
         {
+            _bookRepositoryService = bookRepositoryService;
             _bookRepository = bookRepository;
         }
         public Dictionary<int , string> MenuList()
         {
-            Dictionary<int,string> _menuList = new Dictionary<int, string>();
-
-            int weeks = 5;                                  // Jakoś inaczej to zrobic
-            _menuList.Add(1, "Dodanie ksiazki.");
-            _menuList.Add(2, "Usuniecie ksiazki z katalogu.");
-            _menuList.Add(3, "Wyszukiwanie ksiazki po nazwie autorze lub numerze ISBN.");
-            _menuList.Add(4, $"Wyszukanie książek, które nie zostały wypożyczone przez ostatnie {weeks} tygodnie.");
-            _menuList.Add(5, "Wypozyczenie ksiazki (trzeba podac imie i nazwisko wypozyczajacego).");
-            _menuList.Add(6, "Wyswietlenie listy ludzi, ktorzy aktualnie maja wypozyczona" +
-                " jakakolwiek ksiazke wraz z iloscia wypozyczonych ksiazek (np.Jan Kowalski:10 ksiazek)");
-            _menuList.Add(7, "Wyswietl liste wszystkich ksiazek");
+            Dictionary<int, string> _menuList = new Dictionary<int, string>
+            {
+                { 1, "Dodanie ksiazki." },
+                { 2, "Usuniecie ksiazki z katalogu." },
+                { 3, "Wyszukiwanie ksiazki po nazwie autorze lub numerze ISBN." },
+                { 4, $"Wyszukanie książek, które nie zostały wypożyczone przez ostatnie x tygodni." },
+                { 5, "Wypozyczenie ksiazki (trzeba podac imie i nazwisko wypozyczajacego)." },
+                {
+                    6,
+                    "Wyswietlenie listy ludzi, ktorzy aktualnie maja wypozyczona" +
+                " jakakolwiek ksiazke wraz z iloscia wypozyczonych ksiazek (np.Jan Kowalski:10 ksiazek)"
+                },
+                { 7, "Wyswietl liste wszystkich ksiazek" }
+            };
 
             return _menuList;
         }
@@ -39,15 +45,15 @@ namespace LibraryApp.MenuFolder
             {
                 menu.Append($"{command.Key.ToString()}. {command.Value}\n");
             }
-            menu.Append("\nQ. Exit Program");
+            menu.Append("Q. Exit Program");
 
             return menu.ToString();
         }
 
-        public void showMenu()
+        public void ShowMenu()
         {
-            System.Console.WriteLine(MenuListWriter());
-            var input = System.Console.ReadLine();
+            Console.WriteLine(MenuListWriter());
+            var input = Console.ReadLine();
             switch (input.ToUpper())
             {
                 case "1":
@@ -56,6 +62,7 @@ namespace LibraryApp.MenuFolder
                 case "2":
                     break;
                 case "3":
+                    Console.WriteLine(_bookRepositoryService.BookInfo(_bookRepositoryService.SearchForBook()));
                     break;
                 case "4":
                     break;
@@ -64,15 +71,18 @@ namespace LibraryApp.MenuFolder
                 case "6":
                     break;
                 case "7":
-                    _bookRepository.showBooks();
+                    Console.WriteLine(_bookRepositoryService.BookInfo(_bookRepository.GetBook())); 
                     break;
                 case "Q":
-                    System.Environment.Exit(0);
+                    Environment.Exit(0);
                     break;
                 default:
-                    System.Console.WriteLine("Wrong Command!");
+                    Console.WriteLine("Wrong Command!");
                     break;
             }
+            Console.WriteLine("Powrot");
+            Console.ReadLine();
+            ShowMenu();
         }
     }
 }
