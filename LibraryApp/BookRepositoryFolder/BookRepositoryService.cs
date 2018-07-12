@@ -5,36 +5,31 @@ using System.Text;
 
 namespace LibraryApp.BookRepositoryFolder
 {
-    class BookRepositoryService : IBookRepositoryService
+    class BookRepositoryService
     {
-        private readonly IBookRepository _bookRepository;
-        public BookRepositoryService(IBookRepository bookRepository)
-        {
-            _bookRepository = bookRepository;
-        }
 
-        public IEnumerable<Book> SearchForBook()
+        public static IEnumerable<Book> SearchForBook(IEnumerable<Book> _bookRepository)
         {
             Console.WriteLine("Podaj dokladnie autora, nazwe lub numer ISBN:");
-            string keyWord = Console.ReadLine();
-            if (_bookRepository.GetBook().Any(x => x.name == keyWord || x.author == keyWord || x.ISBNnumber == keyWord))
+            var keyWord = Console.ReadLine();
+            if (_bookRepository.Any(x => x.name == keyWord || x.author == keyWord || x.ISBNnumber == keyWord))
             {
-                return _bookRepository.GetBook().Where(x => x.name == keyWord || x.author == keyWord || x.ISBNnumber == keyWord);
+                return _bookRepository.Where(x => x.name == keyWord || x.author == keyWord || x.ISBNnumber == keyWord);
             }
             return null;
         }
-        public string SearchForBooksInSpecificTime()
+        public static string SearchForBooksInSpecificTime()
         {
 
             return "Hello";
         }
 
-        public string ClientsList()
+        public static string ClientsList()
         {
             return "Hello";
         }
 
-        public string BookInfo(IEnumerable<Book> book)
+        public static string BookInfo(IEnumerable<Book> book)
         {
             if (book == null) return "Nie ma takiej ksiazki w bazie danych.";
             StringBuilder bookInfo = new StringBuilder();

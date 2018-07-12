@@ -121,9 +121,8 @@ namespace LibraryApp.BookRepositoryFolder
             string _author = Console.ReadLine();
             string _ISBNnumber;
             do {
-                Console.WriteLine("Podaj numer ISBN:");
-
-                 _ISBNnumber = Console.ReadLine();
+                Console.WriteLine("Podaj 10-cyfrowy numer ISBN:");
+              _ISBNnumber = Console.ReadLine();
             } while(_ISBNnumber.Length != 10);
             _bookRepository.Add(new Book
             {
@@ -134,10 +133,15 @@ namespace LibraryApp.BookRepositoryFolder
             });
             Console.WriteLine("Ksiazka zostala dodana do bazy danych.");
         }
+
         public void DeleteBooks()
         {
-            Console.WriteLine("Podaj tytul lub numer ISBN ksiazki ktora chcesz usunac: ");
-            Console.ReadLine();
+            var booksToDelete = BookRepositoryService.SearchForBook(this.GetBook());
+            Console.WriteLine(BookRepositoryService.BookInfo(booksToDelete));
+            Console.WriteLine("Aby potwierdzic napisz numer ISBN ksiazki ktora chcesz usunac z bazy danych. UWAGA: Zmiany beda permanentne.");
+            var numberISBNOfBookToDelete = Console.ReadLine();
+            _bookRepository.RemoveAll(x => x.ISBNnumber == numberISBNOfBookToDelete);
+            Console.WriteLine("Ksiazka zostala usunieta z bazy danych.");
         }
         public void BorrowBook()
         {

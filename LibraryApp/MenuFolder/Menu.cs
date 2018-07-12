@@ -9,11 +9,9 @@ namespace LibraryApp.MenuFolder
     class Menu : IMenu
     {
         private readonly IBookRepository _bookRepository;
-        private readonly IBookRepositoryService _bookRepositoryService;
 
-        public Menu(IBookRepository bookRepository, IBookRepositoryService bookRepositoryService)
+        public Menu(IBookRepository bookRepository)
         {
-            _bookRepositoryService = bookRepositoryService;
             _bookRepository = bookRepository;
         }
         public Dictionary<int , string> MenuList()
@@ -23,13 +21,10 @@ namespace LibraryApp.MenuFolder
                 { 1, "Dodanie ksiazki." },
                 { 2, "Usuniecie ksiazki z katalogu." },
                 { 3, "Wyszukiwanie ksiazki po nazwie autorze lub numerze ISBN." },
-                { 4, $"Wyszukanie książek, które nie zostały wypożyczone przez ostatnie x tygodni." },
+                { 4, "Wyszukanie książek, które nie zostały wypożyczone przez ostatnie x tygodni." },
                 { 5, "Wypozyczenie ksiazki (trzeba podac imie i nazwisko wypozyczajacego)." },
-                {
-                    6,
-                    "Wyswietlenie listy ludzi, ktorzy aktualnie maja wypozyczona" +
-                " jakakolwiek ksiazke wraz z iloscia wypozyczonych ksiazek (np.Jan Kowalski:10 ksiazek)"
-                },
+                { 6, "Wyswietlenie listy ludzi, ktorzy aktualnie maja wypozyczona" +
+                " jakakolwiek ksiazke wraz z iloscia wypozyczonych ksiazek (np.Jan Kowalski:10 ksiazek)" },
                 { 7, "Wyswietl liste wszystkich ksiazek" }
             };
 
@@ -60,9 +55,10 @@ namespace LibraryApp.MenuFolder
                     _bookRepository.AddBooks();
                     break;
                 case "2":
+                    _bookRepository.DeleteBooks();
                     break;
                 case "3":
-                    Console.WriteLine(_bookRepositoryService.BookInfo(_bookRepositoryService.SearchForBook()));
+                    Console.WriteLine(BookRepositoryService.BookInfo(BookRepositoryService.SearchForBook(_bookRepository.GetBook())));
                     break;
                 case "4":
                     break;
@@ -71,7 +67,7 @@ namespace LibraryApp.MenuFolder
                 case "6":
                     break;
                 case "7":
-                    Console.WriteLine(_bookRepositoryService.BookInfo(_bookRepository.GetBook())); 
+                    Console.WriteLine(BookRepositoryService.BookInfo(_bookRepository.GetBook())); 
                     break;
                 case "Q":
                     Environment.Exit(0);

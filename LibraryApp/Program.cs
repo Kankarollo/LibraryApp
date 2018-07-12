@@ -8,8 +8,7 @@ namespace LibraryApp
     {
 
         private static readonly BookRepository bookRepository = new BookRepository(menu);
-        private static readonly BookRepositoryService bookRepositoryService = new BookRepositoryService(bookRepository);
-        private static readonly Menu menu = new Menu(bookRepository, bookRepositoryService);
+        private static readonly Menu menu = new Menu(bookRepository);
 
 
         static void Main(string[] args)
