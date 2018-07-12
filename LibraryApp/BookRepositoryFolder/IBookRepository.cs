@@ -7,7 +7,6 @@ namespace LibraryApp.BookRepositoryFolder
         void AddBooks();
         void BorrowBook();
         void DeleteBooks();
-        IEnumerable<Book> GetBooks();
-        void showBooks();
+        IEnumerable<Book> GetBook();
     }
 }

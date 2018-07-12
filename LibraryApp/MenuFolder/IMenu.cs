@@ -6,5 +6,6 @@ namespace LibraryApp.MenuFolder
     {
         Dictionary<int, string> MenuList();
         string MenuListWriter();
+        void ShowMenu();
     }
 }
