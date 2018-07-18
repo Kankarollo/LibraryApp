@@ -61,10 +61,13 @@ namespace LibraryApp.MenuFolder
                     Console.WriteLine(BookRepositoryService.BookInfo(BookRepositoryService.SearchForBook(_bookRepository.GetBook())));
                     break;
                 case "4":
+                    Console.WriteLine(BookRepositoryService.BookInfo(BookRepositoryService.SearchForBooksInSpecificTime(_bookRepository.GetBook())));
                     break;
                 case "5":
+                    _bookRepository.BorrowBook();
                     break;
                 case "6":
+                    Console.WriteLine(BookRepositoryService.ClientsList(_bookRepository.GetBook()));
                     break;
                 case "7":
                     Console.WriteLine(BookRepositoryService.BookInfo(_bookRepository.GetBook())); 

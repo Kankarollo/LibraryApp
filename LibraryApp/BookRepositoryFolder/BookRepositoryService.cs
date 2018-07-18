@@ -18,28 +18,47 @@ namespace LibraryApp.BookRepositoryFolder
             }
             return null;
         }
-        public static string SearchForBooksInSpecificTime()
-        {
 
-            return "Hello";
-        }
-
-        public static string ClientsList()
+        public static IEnumerable<Book> SearchForBooksInSpecificTime(IEnumerable<Book> _bookRepository)
         {
-            return "Hello";
-        }
-
-        public static string BookInfo(IEnumerable<Book> book)
-        {
-            if (book == null) return "Nie ma takiej ksiazki w bazie danych.";
-            StringBuilder bookInfo = new StringBuilder();
-            foreach (var _book in book)
+            Console.WriteLine("Podaj zakres tygodni, w ktorym szukasz ksiazek:");
+            var searchWeeks = Console.ReadLine();
+            if(Int32.TryParse(searchWeeks, out int result))
             {
-                bookInfo.AppendLine("\nTytul: " + _book.name);
-                bookInfo.AppendLine("Autor: " + _book.author);
-                bookInfo.AppendLine("Numer ISBN: " + _book.ISBNnumber);
-                bookInfo.AppendLine("Ostatnio wypozyczona: " + _book.lastBorrow.Date);
-                bookInfo.AppendLine("Wypozyczone przez: " + _book.borrower);
+                return _bookRepository.Where(x => x.lastBorrow == null || (DateTime.Today - x.lastBorrow).TotalDays / 7 <= result);
+            }
+            else
+            {
+                Console.WriteLine("Blednie podany zakres, pamietaj by podac tylko liczbe.");
+                return SearchForBooksInSpecificTime(_bookRepository);
+            }            
+        }
+        
+        public static string ClientsList(IEnumerable<Book> _bookRepository)
+        {
+            /*DO DOKONCZENIA! */
+            Console.WriteLine("Wyswietlenie wszystkich klientow biblioteki: ");
+            StringBuilder clientList = new StringBuilder();
+            IEnumerable<Book> borrowedBooks = _bookRepository.Where(x => x.borrowed);
+            foreach (var borrowedBook in borrowedBooks)
+            {
+                clientList.AppendLine($"\nImie i nazwisko: {borrowedBook.borrower}");
+                clientList.AppendLine($"Wypozyczone: {borrowedBook.name} {borrowedBook.ISBNnumber}");
+            }
+            return clientList.ToString();
+        }
+
+        public static string BookInfo(IEnumerable<Book> _bookRepository)
+        {
+            if (_bookRepository == null) return "Nie ma takiej ksiazki w bazie danych.";
+            StringBuilder bookInfo = new StringBuilder();
+            foreach (var _book in _bookRepository)
+            {
+                bookInfo.AppendLine($"\nTytul: {_book.name}");
+                bookInfo.AppendLine($"Autor: { _book.author}");
+                bookInfo.AppendLine($"Numer ISBN: {_book.ISBNnumber}");
+                bookInfo.AppendLine($"Ostatnio wypozyczona: {_book.lastBorrow.Date}");
+                bookInfo.AppendLine($"Wypozyczone przez: {_book.borrower}");
                 bookInfo.Append("Wypozyczone: "); if (_book.borrowed) bookInfo.AppendLine("Tak\n"); else bookInfo.AppendLine("Nie\n");
             }
             return bookInfo.ToString();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using LibraryApp.MenuFolder;
 
@@ -143,10 +144,31 @@ namespace LibraryApp.BookRepositoryFolder
             _bookRepository.RemoveAll(x => x.ISBNnumber == numberISBNOfBookToDelete);
             Console.WriteLine("Ksiazka zostala usunieta z bazy danych.");
         }
+
         public void BorrowBook()
         {
             Console.WriteLine("Podaj tytul lub numer ISBN ksiazki ktora chcesz wypozyczyc: ");
-            Console.ReadLine();
+            var keyWord = Console.ReadLine();
+            Book toBorrow = _bookRepository.Find(x => x.name == keyWord || x.ISBNnumber == keyWord);
+            Console.WriteLine("Czy chodzilo ci o ksiazke...: ");
+            Console.WriteLine(BookRepositoryService.BookInfo(_bookRepository.Where(x => x.name == keyWord || x.ISBNnumber == keyWord)));
+            Console.WriteLine("Jesli nie wcisnij  'q' by anulowac.");
+            if (Console.ReadLine() == "q") return;
+            Console.WriteLine("Prosze podac imie i nazwisko.");
+            var borrower = Console.ReadLine();
+            if (!toBorrow.borrowed)
+            {
+                toBorrow.borrower = borrower;
+                toBorrow.borrowed = true;
+                toBorrow.lastBorrow = DateTime.Today;
+            }
+            else
+            {
+                Console.WriteLine("Niestety ksiazka zostala wypozyczona "
+                    + toBorrow.lastBorrow);
+                return;
+            }
+            Console.WriteLine("Ksiazka zostala wypozyczona do " + toBorrow.lastBorrow.AddMonths(1));
         }
     }
 }
