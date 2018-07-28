@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LibraryApp.DataLoader;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -48,6 +50,18 @@ namespace LibraryApp.BookRepositoryFolder
                 bookInfo.Append("Wypozyczone: "); if (_book.borrowed) bookInfo.AppendLine("Tak\n"); else bookInfo.AppendLine("Nie\n");
             }
             return bookInfo.ToString();
+        }
+
+        public static void SaveChangesToFile(IJSONService _jsonService, IXMLService _xmlService, string pathname, List<Book> _bookRepository)
+        {
+            if(Path.GetExtension(pathname) == ".xml")
+            {
+                _xmlService.SaveChangesToXmlFile(_bookRepository);
+            }
+            else if(Path.GetExtension(pathname) == ".json")
+            {
+                _jsonService.SaveChangesToJsonFile(_bookRepository);
+            }
         }
     }
 }

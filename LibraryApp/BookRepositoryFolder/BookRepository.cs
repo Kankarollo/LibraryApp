@@ -1,6 +1,8 @@
 ﻿using LibraryApp.ClientRepositoryFolder;
+using LibraryApp.DataLoader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -8,6 +10,17 @@ namespace LibraryApp.BookRepositoryFolder
 {
     class BookRepository : IBookRepository
     {
+        private readonly IJSONService _jsonService;
+        private readonly IXMLService _xmlService;
+        public string pathname;
+
+        public BookRepository(IJSONService jsonService, IXMLService xmlService)
+        {
+            _xmlService = xmlService;
+            _jsonService = jsonService;
+            LoadBookRepository();
+        }
+
         //private static List<Book> _bookRepository = new List<Book>
         //{
         //    new Book
@@ -105,14 +118,31 @@ namespace LibraryApp.BookRepositoryFolder
 
         private static List<Book> _bookRepository = new List<Book>();
 
-        public BookRepository()
-        {
-
-        }
-
         public IEnumerable<Book> GetBookRepo()
         {
             return _bookRepository;
+        }
+
+        public void LoadBookRepository()
+        {
+            Console.WriteLine("Podaj dokladnie nazwe pliku z danymi. Plik musi miescic sie w folderze DataFiles w projekcie:");
+            pathname = Console.ReadLine();
+            var extension = Path.GetExtension(pathname);
+            if (extension == ".xml")
+            {
+                var xmlData = _xmlService.LoadXmlDataFromFile(pathname);
+                _bookRepository = _xmlService.ExtractBookDataFromXmlData(xmlData);
+            }
+            else if(extension == ".json")
+            {
+                _bookRepository = _jsonService.ConvertJsonToList(pathname);
+            }
+            else
+            {
+                Console.WriteLine("Brak pliku spelniajacego wymagania.");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
         }
 
         public void AddBooks()
@@ -131,9 +161,11 @@ namespace LibraryApp.BookRepositoryFolder
                 name = _title,
                 author = _author,
                 ISBNnumber = _ISBNnumber,
+                borrower = "",
                 borrowed = false
             });
             Console.WriteLine("Ksiazka zostala dodana do bazy danych.");
+            BookRepositoryService.SaveChangesToFile(_jsonService, _xmlService, pathname, _bookRepository);
         }
 
         public void DeleteBooks(IClientRepository _clientRepository)
@@ -148,6 +180,7 @@ namespace LibraryApp.BookRepositoryFolder
             }
             _bookRepository.RemoveAll(x => x.ISBNnumber == numberISBNOfBookToDelete);
             Console.WriteLine("Ksiazka zostala usunieta z bazy danych.");
+            BookRepositoryService.SaveChangesToFile(_jsonService, _xmlService, pathname, _bookRepository);
         }
 
         public void BorrowBook(IClientRepository _clientRepository)
@@ -175,7 +208,8 @@ namespace LibraryApp.BookRepositoryFolder
                 return;
             }
             Console.WriteLine("Ksiazka zostala wypozyczona do " + toBorrow.lastBorrow.AddMonths(1));
-           
+            BookRepositoryService.SaveChangesToFile(_jsonService, _xmlService, pathname, _bookRepository);
         }
+
     }
 }

@@ -1,17 +1,1 @@
-{"Library":	{
-			"Book":
-				[
-				{"title": "Eragon", "author": "Christopher Paolini", "ISBN":"3125167430","lastBorrow":"01/15/2018","borrower": "Klaudia","borrowed": "Yes"},
-				{"title": "Harry Potter", "author": "J.K.Rowling", "ISBN":"8271640291","lastBorrow":"02/15/2018","borrower": "","borrowed": "No"},
-				{"title": "Lord of the Rings", "author": "J.R.R.Tolkien", "ISBN":"2617287509","lastBorrow":"01/19/2017","borrower": "","borrowed": "No"},
-				{"title": "Krzyzacy", "author": "Henryk Sienkiewicz", "ISBN":"8472618263","lastBorrow":"04/08/2018","borrower": "Milosz","borrowed": "Yes"},
-				{"title": "Potop", "author": "Henryk Sienkiewicz", "ISBN":"6271823721","lastBorrow":"08/28/2018","borrower": "Kacper","borrowed": "Yes"},
-				{"title": "Opowiesci z Narnii", "author": "C.S.S.Lewis", "ISBN":"6251728391","lastBorrow":"01/17/2018","borrower": "","borrowed": "No"},
-				{"title": "Gra o Tron", "author": "J.J.Martin", "ISBN":"6386542198","lastBorrow":"08/04/2018","borrower": "Hubert","borrowed": "Yes"},
-				{"title": "Malowany Czlowiek", "author": "Peter.V.Brett", "ISBN":"4512391024","lastBorrow":"04/26/2018","borrower": "Michal","borrowed": "Yes"},
-				{"title": "Dzuma", "author": "Albert Camus", "ISBN":"0851847598","lastBorrow":"04/25/2018","borrower": "Pawel","borrowed": "Yes"},
-				{"title": "Dwie Wieze", "author": "J.R.R.Tolkien", "ISBN":"7218285123","lastBorrow":"05/05/2018","borrower": "Milosz","borrowed": "Yes"},
-				{"title": "Powrot Krola", "author": "J.R.R.Tolkien", "ISBN":"7314124196","lastBorrow":"02/25/2018","borrower": "Milosz","borrowed": "Yes"}
-				]
-			}
-}
+[{"name":"Eragon","author":"Christopher Paolini","ISBNnumber":"3125167430","lastBorrow":"2018-01-15T00:00:00","borrower":"Klaudia","borrowed":true},{"name":"Harry Potter","author":"J.K.Rowling","ISBNnumber":"8271640291","lastBorrow":"2018-02-15T00:00:00","borrower":"","borrowed":false},{"name":"Lord of the Rings","author":"J.R.R.Tolkien","ISBNnumber":"2617287509","lastBorrow":"2017-01-19T00:00:00","borrower":"","borrowed":false},{"name":"Krzyzacy","author":"Henryk Sienkiewicz","ISBNnumber":"8472618263","lastBorrow":"2018-04-08T00:00:00","borrower":"Milosz","borrowed":true},{"name":"Potop","author":"Henryk Sienkiewicz","ISBNnumber":"6271823721","lastBorrow":"2018-08-28T00:00:00","borrower":"Kacper","borrowed":true},{"name":"Opowiesci z Narnii","author":"C.S.S.Lewis","ISBNnumber":"6251728391","lastBorrow":"2018-01-17T00:00:00","borrower":"","borrowed":false},{"name":"Gra o Tron","author":"J.J.Martin","ISBNnumber":"6386542198","lastBorrow":"2018-08-04T00:00:00","borrower":"Hubert","borrowed":true},{"name":"Malowany Czlowiek","author":"Peter.V.Brett","ISBNnumber":"4512391024","lastBorrow":"2018-04-26T00:00:00","borrower":"Michal","borrowed":true},{"name":"Dzuma","author":"Albert Camus","ISBNnumber":"0851847598","lastBorrow":"2018-04-25T00:00:00","borrower":"Pawel","borrowed":true},{"name":"Dwie Wieze","author":"J.R.R.Tolkien","ISBNnumber":"7218285123","lastBorrow":"2018-05-05T00:00:00","borrower":"Milosz","borrowed":true},{"name":"Powrot Krola","author":"J.R.R.Tolkien","ISBNnumber":"7314124196","lastBorrow":"2018-02-25T00:00:00","borrower":"Milosz","borrowed":true},{"name":"Quo Vadis","author":"Henryk Sienkiewicz","ISBNnumber":"9876543210","lastBorrow":"0001-01-01T00:00:00","borrower":"","borrowed":false}]

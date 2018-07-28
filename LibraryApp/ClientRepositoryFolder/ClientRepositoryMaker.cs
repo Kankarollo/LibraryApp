@@ -11,7 +11,6 @@ namespace LibraryApp.ClientRepositoryFolder
        
         public static void  MakeClientRepository(IClientRepository _clientRepository, IBookRepository _bookRepository)
         {
-
             foreach (var book in _bookRepository.GetBookRepo())
             {
                 if (book.borrowed)
