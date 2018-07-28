@@ -1,0 +1,17 @@
+{"Library":	{
+			"Book":
+				[
+				{"title": "Eragon", "author": "Christopher Paolini", "ISBN":"3125167430","lastBorrow":"01/15/2018","borrower": "Klaudia","borrowed": "Yes"},
+				{"title": "Harry Potter", "author": "J.K.Rowling", "ISBN":"8271640291","lastBorrow":"02/15/2018","borrower": "","borrowed": "No"},
+				{"title": "Lord of the Rings", "author": "J.R.R.Tolkien", "ISBN":"2617287509","lastBorrow":"01/19/2017","borrower": "","borrowed": "No"},
+				{"title": "Krzyzacy", "author": "Henryk Sienkiewicz", "ISBN":"8472618263","lastBorrow":"04/08/2018","borrower": "Milosz","borrowed": "Yes"},
+				{"title": "Potop", "author": "Henryk Sienkiewicz", "ISBN":"6271823721","lastBorrow":"08/28/2018","borrower": "Kacper","borrowed": "Yes"},
+				{"title": "Opowiesci z Narnii", "author": "C.S.S.Lewis", "ISBN":"6251728391","lastBorrow":"01/17/2018","borrower": "","borrowed": "No"},
+				{"title": "Gra o Tron", "author": "J.J.Martin", "ISBN":"6386542198","lastBorrow":"08/04/2018","borrower": "Hubert","borrowed": "Yes"},
+				{"title": "Malowany Czlowiek", "author": "Peter.V.Brett", "ISBN":"4512391024","lastBorrow":"04/26/2018","borrower": "Michal","borrowed": "Yes"},
+				{"title": "Dzuma", "author": "Albert Camus", "ISBN":"0851847598","lastBorrow":"04/25/2018","borrower": "Pawel","borrowed": "Yes"},
+				{"title": "Dwie Wieze", "author": "J.R.R.Tolkien", "ISBN":"7218285123","lastBorrow":"05/05/2018","borrower": "Milosz","borrowed": "Yes"},
+				{"title": "Powrot Krola", "author": "J.R.R.Tolkien", "ISBN":"7314124196","lastBorrow":"02/25/2018","borrower": "Milosz","borrowed": "Yes"}
+				]
+			}
+}

@@ -34,20 +34,6 @@ namespace LibraryApp.BookRepositoryFolder
             }            
         }
         
-        public static string ClientsList(IEnumerable<Book> _bookRepository)
-        {
-            /*DO DOKONCZENIA! */
-            Console.WriteLine("Wyswietlenie wszystkich klientow biblioteki: ");
-            StringBuilder clientList = new StringBuilder();
-            IEnumerable<Book> borrowedBooks = _bookRepository.Where(x => x.borrowed);
-            foreach (var borrowedBook in borrowedBooks)
-            {
-                clientList.AppendLine($"\nImie i nazwisko: {borrowedBook.borrower}");
-                clientList.AppendLine($"Wypozyczone: {borrowedBook.name} {borrowedBook.ISBNnumber}");
-            }
-            return clientList.ToString();
-        }
-
         public static string BookInfo(IEnumerable<Book> _bookRepository)
         {
             if (_bookRepository == null) return "Nie ma takiej ksiazki w bazie danych.";

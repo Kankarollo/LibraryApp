@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using LibraryApp.BookRepositoryFolder;
-
+using LibraryApp.ClientRepositoryFolder;
 
 namespace LibraryApp.MenuFolder
 {
     class Menu : IMenu
     {
         private readonly IBookRepository _bookRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public Menu(IBookRepository bookRepository)
+        public Menu(IBookRepository bookRepository, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _bookRepository = bookRepository;
         }
         public Dictionary<int , string> MenuList()
@@ -55,22 +57,22 @@ namespace LibraryApp.MenuFolder
                     _bookRepository.AddBooks();
                     break;
                 case "2":
-                    _bookRepository.DeleteBooks();
+                    _bookRepository.DeleteBooks(_clientRepository);
                     break;
                 case "3":
-                    Console.WriteLine(BookRepositoryService.BookInfo(BookRepositoryService.SearchForBook(_bookRepository.GetBook())));
+                    Console.WriteLine(BookRepositoryService.BookInfo(BookRepositoryService.SearchForBook(_bookRepository.GetBookRepo())));
                     break;
                 case "4":
-                    Console.WriteLine(BookRepositoryService.BookInfo(BookRepositoryService.SearchForBooksInSpecificTime(_bookRepository.GetBook())));
+                    Console.WriteLine(BookRepositoryService.BookInfo(BookRepositoryService.SearchForBooksInSpecificTime(_bookRepository.GetBookRepo())));
                     break;
                 case "5":
-                    _bookRepository.BorrowBook();
+                    _bookRepository.BorrowBook(_clientRepository);
                     break;
                 case "6":
-                    Console.WriteLine(BookRepositoryService.ClientsList(_bookRepository.GetBook()));
+                    Console.WriteLine(ClientRepositoryMaker.ClientListReader(_clientRepository));
                     break;
                 case "7":
-                    Console.WriteLine(BookRepositoryService.BookInfo(_bookRepository.GetBook())); 
+                    Console.WriteLine(BookRepositoryService.BookInfo(_bookRepository.GetBookRepo())); 
                     break;
                 case "Q":
                     Environment.Exit(0);
