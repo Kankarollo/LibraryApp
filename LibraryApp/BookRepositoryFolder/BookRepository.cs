@@ -125,7 +125,8 @@ namespace LibraryApp.BookRepositoryFolder
 
         public void LoadBookRepository()
         {
-            Console.WriteLine("Podaj dokladnie nazwe pliku z danymi. Plik musi miescic sie w folderze DataFiles w projekcie:");
+            Console.WriteLine("Podaj dokladnie nazwe pliku z danymi. Plik musi miescic sie w folderze DataFiles w projekcie" +
+                "(Testowe pliki w projekcie jsonFile.json, xmlFile.xml):");
             pathname = Console.ReadLine();
             var extension = Path.GetExtension(pathname);
             if (extension == ".xml")
@@ -161,6 +162,7 @@ namespace LibraryApp.BookRepositoryFolder
                 name = _title,
                 author = _author,
                 ISBNnumber = _ISBNnumber,
+                lastBorrow = DateTime.Now,
                 borrower = "",
                 borrowed = false
             });

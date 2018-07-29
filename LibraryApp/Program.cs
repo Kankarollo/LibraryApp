@@ -20,7 +20,6 @@ namespace LibraryApp
             ClientRepositoryMaker.MakeClientRepository(clientRepository, bookRepository);
             Console.WriteLine("\nWelcome in library system LibraryApp v1.0");
             menu.ShowMenu();
-            //XMLService.Test();
         }
     }
 }

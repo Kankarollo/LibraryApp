@@ -40,17 +40,15 @@ namespace LibraryApp.DataLoader
                 var _name = bookElement.Element("name").Value;
                 var _author = bookElement.Element("author").Value;
                 var _ISBNnumber = bookElement.Element("ISBNnumber").Value;
-               // var _lastBorrow = MakeDateFromXmlData(bookElement.Element("lastBorrow"));
+                var _lastBorrow = DateTime.Parse(bookElement.Element("lastBorrow").Value);
                 var _borrower = bookElement.Element("borrower").Value;
                 var _borrowed = Boolean.Parse(bookElement.Element("borrowed").Value);
-                
-
                 listOfBooks.Add(new Book
                 {
                     name =  _name,
                     author = _author,
                     ISBNnumber = _ISBNnumber,
-                   // lastBorrow = _lastBorrow,
+                    lastBorrow = _lastBorrow,
                     borrower = _borrower,
                     borrowed = _borrowed 
                 });
