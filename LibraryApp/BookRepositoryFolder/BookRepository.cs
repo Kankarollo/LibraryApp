@@ -21,7 +21,7 @@ namespace LibraryApp.BookRepositoryFolder
             LoadBookRepository();
         }
 
-        //private static List<Book> _bookRepository = new List<Book>
+        //private static List<Book> _TestbookRepository = new List<Book>
         //{
         //    new Book
         //    {
@@ -116,7 +116,7 @@ namespace LibraryApp.BookRepositoryFolder
         //    },
         //};
 
-        private static List<Book> _bookRepository = new List<Book>();
+        private List<Book> _bookRepository = new List<Book>();
 
         public IEnumerable<Book> GetBookRepo()
         {
@@ -136,7 +136,7 @@ namespace LibraryApp.BookRepositoryFolder
             }
             else if(extension == ".json")
             {
-                _bookRepository = _jsonService.ConvertJsonToList(pathname);
+                _bookRepository = _jsonService.GetJsonList(pathname);
             }
             else
             {
@@ -172,7 +172,8 @@ namespace LibraryApp.BookRepositoryFolder
 
         public void DeleteBooks(IClientRepository _clientRepository)
         {
-            var booksToDelete = BookRepositoryService.SearchForBook(GetBookRepo());
+            BookFoundByName bookFoundByName = new BookFoundByName();
+            var booksToDelete = bookFoundByName.Books(_bookRepository);
             Console.WriteLine(BookRepositoryService.BookInfo(booksToDelete));
             Console.WriteLine("Aby potwierdzic napisz numer ISBN ksiazki ktora chcesz usunac z bazy danych. UWAGA: Zmiany beda permanentne.");
             var numberISBNOfBookToDelete = Console.ReadLine();
@@ -191,27 +192,27 @@ namespace LibraryApp.BookRepositoryFolder
             var keyWord = Console.ReadLine();
             Book toBorrow = _bookRepository.Find(x => x.name == keyWord || x.ISBNnumber == keyWord);
             Console.WriteLine("Czy chodzilo ci o ksiazke...: ");
-            Console.WriteLine(BookRepositoryService.BookInfo(_bookRepository.Where(x => x.name == keyWord || x.ISBNnumber == keyWord)));
-            Console.WriteLine("Jesli nie wcisnij  'q' by anulowac.");
+            Console.WriteLine(BookRepositoryService.BookInfo(toBorrow));
+            Console.WriteLine("Kliknij Enter aby kontynuowac.\n" +
+                "Jesli nie wcisnij  'q' by anulowac.");
             if (Console.ReadLine() == "q") return;
-            Console.WriteLine("Prosze podac imie i nazwisko.");
-            var borrower = Console.ReadLine();
-            if (!toBorrow.borrowed)
-            {
-                toBorrow.borrower = borrower;
-                toBorrow.borrowed = true;
-                toBorrow.lastBorrow = DateTime.Today;
-                _clientRepository.AddClientsBooks(borrower, toBorrow);
-            }
-            else
+            if (toBorrow.borrowed)
             {
                 Console.WriteLine("Niestety ksiazka zostala wypozyczona "
-                    + toBorrow.lastBorrow);
+                                  + toBorrow.lastBorrow);
                 return;
             }
+            Console.WriteLine("Prosze podac imie i nazwisko.");
+            var borrower = Console.ReadLine();
+            toBorrow.borrower = borrower;
+            toBorrow.borrowed = true;
+            toBorrow.lastBorrow = DateTime.Today;
+            if (_clientRepository.IsClientExist(borrower))
+                _clientRepository.AddClientsBooks(borrower, toBorrow);
+            else
+                _clientRepository.AddClient(borrower, toBorrow);
             Console.WriteLine("Ksiazka zostala wypozyczona do " + toBorrow.lastBorrow.AddMonths(1));
             BookRepositoryService.SaveChangesToFile(_jsonService, _xmlService, pathname, _bookRepository);
         }
-
     }
 }

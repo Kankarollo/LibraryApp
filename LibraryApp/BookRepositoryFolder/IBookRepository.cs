@@ -5,9 +5,10 @@ namespace LibraryApp.BookRepositoryFolder
 {
     interface IBookRepository
     {
-        void AddBooks();
-        void BorrowBook(IClientRepository _clientRepository);
-        void DeleteBooks(IClientRepository _clientRepository);
         IEnumerable<Book> GetBookRepo();
+        void LoadBookRepository();
+        void AddBooks();
+        void DeleteBooks(IClientRepository _clientRepository);
+        void BorrowBook(IClientRepository _clientRepository);
     }
 }

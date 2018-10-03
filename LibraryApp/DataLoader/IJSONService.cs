@@ -5,7 +5,7 @@ namespace LibraryApp.DataLoader
 {
     interface IJSONService
     {
-        List<Book> ConvertJsonToList(string pathname);
+        List<Book> GetJsonList(string pathname);
         void SaveChangesToJsonFile(IEnumerable<Book> bookListToSave);
     }
 }

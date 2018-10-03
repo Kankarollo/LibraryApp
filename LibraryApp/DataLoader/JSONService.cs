@@ -9,9 +9,7 @@ namespace LibraryApp.DataLoader
 {
     class JSONService : IJSONService
     {
-        private string _pathToFile = null;
-
-        public  List<Book> ConvertJsonToList(string pathname)
+        private List<Book> ConvertJsonToList(string pathname)
         {
             _pathToFile = "DataFiles/" + pathname;
             try
@@ -32,6 +30,13 @@ namespace LibraryApp.DataLoader
                 Environment.Exit(0);
                 return null;
             }
+        }
+
+        private string _pathToFile = null;
+
+        public List<Book> GetJsonList(string pathname)
+        {
+            return ConvertJsonToList(pathname);
         }
 
         public void SaveChangesToJsonFile(IEnumerable<Book> bookListToSave)

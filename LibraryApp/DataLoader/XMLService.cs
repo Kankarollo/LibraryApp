@@ -16,7 +16,7 @@ namespace LibraryApp.DataLoader
         {
             PathToFile = "DataFiles/" + pathname;
             XmlDocument file = new XmlDocument();
-            try
+            try 
             {
                 file.Load(PathToFile);
                 string xmlContent = file.InnerXml;
@@ -54,14 +54,6 @@ namespace LibraryApp.DataLoader
                 });
             }
             return listOfBooks;
-        }
-
-        public DateTime MakeDateFromXmlData(XElement dateElement)
-        {
-            Int32.TryParse(dateElement.Element("day").Value, out int day);
-            Int32.TryParse(dateElement.Element("month").Value, out int month);
-            Int32.TryParse(dateElement.Element("year").Value, out int year);
-            return new DateTime(year,month,day);
         }
 
         public void SaveChangesToXmlFile(List<Book> _bookRepository)
@@ -120,7 +112,5 @@ namespace LibraryApp.DataLoader
 
         //    Console.ReadKey();
         //}
-
-
     }
 }

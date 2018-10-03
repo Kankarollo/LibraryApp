@@ -9,7 +9,6 @@ namespace LibraryApp.DataLoader
     {
         List<Book> ExtractBookDataFromXmlData(IEnumerable<XElement> xmlData);
         IEnumerable<XElement> LoadXmlDataFromFile(string pathname);
-        DateTime MakeDateFromXmlData(XElement dateElement);
         void SaveChangesToXmlFile(List<Book> _bookRepository);
     }
 }

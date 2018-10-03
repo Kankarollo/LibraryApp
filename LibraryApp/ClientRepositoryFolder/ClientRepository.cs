@@ -8,8 +8,31 @@ namespace LibraryApp.ClientRepositoryFolder
 {
     class ClientRepository : IClientRepository
     {
+        private List<Client> _clientRepository = new List<Client>();
 
-        private static List<Client> _clientRepository = new List<Client>();
+        public ClientRepository(IBookRepository _bookRepository)
+        {
+            foreach (var book in _bookRepository.GetBookRepo())
+            {
+                if (book.borrowed)
+                {
+                    var _name = book.borrower;
+                    if (GetClients().Any(x => x.Name == _name))
+                        AddClientsBooks(_name, book);
+                    else
+                        AddClient(_name, book);
+                }
+            }
+        }
+        public IEnumerable<Client> GetClients()
+        {
+            return _clientRepository;
+        }
+
+        public bool IsClientExist(string keyName)
+        {
+            return _clientRepository.Any(x => x.Name == keyName);
+        }
 
         public void AddClient(string _name, Book _booksBorrowed)
         {
@@ -33,10 +56,6 @@ namespace LibraryApp.ClientRepositoryFolder
             _clientRepository.RemoveAll(x => x.Name == _name);
         }
 
-        public IEnumerable<Client> GetClients()
-        {
-            return _clientRepository;
-        }
 
     }
 }
