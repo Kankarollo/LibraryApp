@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using LibraryApp.ClientRepositoryFolder;
+using System.Collections.Generic;
 
 namespace LibraryApp.BookRepositoryFolder
 {
     interface IBookRepository
     {
+        IEnumerable<Book> GetBookRepo();
+        void LoadBookRepository();
         void AddBooks();
-        void BorrowBook();
-        void DeleteBooks();
-        IEnumerable<Book> GetBook();
+        void DeleteBooks(IClientRepository _clientRepository);
+        void BorrowBook(IClientRepository _clientRepository);
     }
 }
